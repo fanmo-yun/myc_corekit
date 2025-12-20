@@ -1,3 +1,3 @@
-# c_dynamic_string
+# myc_corekit
 
-This is a small project to learn dynamic malloc in c.
+This is a small project to learn dynamic malloc string array and thread pool in c.
