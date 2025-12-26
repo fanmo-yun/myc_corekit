@@ -1,42 +1,35 @@
 #ifndef DYNSTRING_H
 #define DYNSTRING_H
 
-#include <stdio.h>
+#include <stddef.h>
 #include <stdint.h>
-#include <string.h>
-#include <stdlib.h>
 #include <stdbool.h>
 
-typedef struct STRING {
-    char* str;
-    size_t length;
-    size_t capacity;
-} string;
+typedef c_string c_string;
 
-string* new_string(const char*);
-string* new_string_with_size(size_t);
-string* string_clone(string*);
-void free_string(string*);
+c_string* new_string(const char*);
+c_string* new_string_reserve(size_t);
+c_string* string_clone(const c_string*);
 
-int32_t string_grow(string*, size_t);
-int32_t string_shrink(string*);
+int32_t string_reserve(c_string*, size_t);
+int32_t string_shrink(c_string*);
+int32_t string_zero(c_string*);
+int32_t string_clear(c_string*);
+int32_t string_copy(c_string*, const c_string*);
+int32_t string_write_str(c_string*, const char*);
+int32_t string_push(c_string*, const char*);
+int32_t string_insert(c_string*, size_t, const char*);
+int32_t string_push_front(c_string*, const char*);
+int32_t string_pop(c_string*, char*);
+int32_t string_pop_front(c_string*, char*);
+int32_t string_remove(c_string*, size_t, size_t);
 
-int32_t string_zero(string*);
-int32_t string_clear(string*);
-int32_t string_copy(string*, string*);
-int32_t string_write(string*, const char*);
-int32_t string_push(string*, const char*);
-int32_t string_insert(string*, size_t, const char*);
-int32_t string_push_front(string*, const char*);
-int32_t string_pop(string*, char*);
-int32_t string_pop_front(string*, char*);
+bool string_empty(const c_string*);
+size_t string_length(const c_string*);
+bool string_contains(const c_string*, const char*);
+int32_t string_find(const c_string*, const char*);
 
-bool string_empty(const string*);
-size_t string_length(const string*);
-int32_t string_contains(const string*, const char*);
-int32_t string_find(const string*, const char*);
-
-const char* string_cstr(const string*);
-char* string_to_cstr(string*);
+char* string_to_cstr(const c_string*);
+const char* string_cstr(const c_string*);
 
 #endif
